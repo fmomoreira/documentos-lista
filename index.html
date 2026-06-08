@@ -3,8 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Novos RGs Disponíveis - São José do Belmonte</title>
+    <title>Lista de RGs Prontos - São José do Belmonte | Consulta Oficial</title>
     
+    <!-- ========================================== -->
+    <!-- 🤖 OTIMIZAÇÃO PARA IAs E BUSCAS (SEO)      -->
+    <!-- ========================================== -->
+    <meta name="description" content="Acesse a lista oficial de documentos de Identidade (Novo RG/CIN) prontos para entrega na Prefeitura de São José do Belmonte. Veja se o seu nome está na lista e saiba onde retirar.">
+    <meta name="keywords" content="RG pronto, Carteira de Identidade Nacional, CIN, São José do Belmonte, Prefeitura, Documentos, Retirada de RG, Adeilson Alves Feitosa">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="author" content="Prefeitura de São José do Belmonte">
+
+    <!-- Open Graph (Card bonito ao colar o link no WhatsApp/Facebook) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://saojosedobelmonte.pe.gov.br/"> <!-- Substitua pela URL do site -->
+    <meta property="og:title" content="📢 Seu Novo RG está pronto! - São José do Belmonte">
+    <meta property="og:description" content="A lista de RGs (CIN) solicitados já foi atualizada. Clique para verificar se o seu nome está disponível para retirada.">
+    <meta property="og:image" content="https://saojosedobelmonte.pe.gov.br/new/wp-content/uploads/2025/01/Logo-Prefeitura-de-Belmonte-01.png">
+    <meta property="og:image:alt" content="Logo da Prefeitura de São José do Belmonte">
+    <meta property="og:site_name" content="Serviços ao Cidadão - São José do Belmonte">
+
+    <!-- Schema.org / JSON-LD (Permite que o ChatGPT e Google respondam dúvidas sobre o serviço) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "GovernmentService",
+      "name": "Entrega de Nova Carteira de Identidade Nacional (CIN)",
+      "provider": {
+        "@type": "GovernmentOrganization",
+        "name": "Prefeitura Municipal de São José do Belmonte",
+        "url": "https://saojosedobelmonte.pe.gov.br",
+        "logo": "https://saojosedobelmonte.pe.gov.br/new/wp-content/uploads/2025/01/Logo-Prefeitura-de-Belmonte-01.png"
+      },
+      "description": "Consulta oficial de cidadãos com o novo RG pronto para retirada no município.",
+      "areaServed": {
+        "@type": "City",
+        "name": "São José do Belmonte",
+        "addressRegion": "PE",
+        "addressCountry": "BR"
+      },
+      "serviceLocation": {
+        "@type": "Place",
+        "name": "Centro Comercial Adeilson Alves Feitosa",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Praça da Saudade, S/N, Centro",
+          "addressLocality": "São José do Belmonte",
+          "addressRegion": "PE"
+        }
+      },
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "13:00"
+      }
+    }
+    </script>
+    
+    <!-- Biblioteca Html2Canvas para Gerar a Imagem na Hora do Compartilhamento -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -72,8 +130,8 @@
 </head>
 <body class="text-slate-800 pb-24">
 
-    <!-- Cabeçalho Fixo -->
-    <header class="glass sticky top-0 z-50 border-b border-slate-200/60 pt-safe transition-all duration-300" id="header">
+    <!-- Cabeçalho Fixo (Escondido na hora do print da imagem) -->
+    <header class="glass sticky top-0 z-50 border-b border-slate-200/60 pt-safe transition-all duration-300" id="header" data-html2canvas-ignore="true">
         <div class="max-w-2xl mx-auto px-4 py-3 flex justify-center items-center">
             <img src="https://saojosedobelmonte.pe.gov.br/new/wp-content/uploads/2025/01/Logo-Prefeitura-de-Belmonte-01.png" 
                  alt="Prefeitura de São José do Belmonte" 
@@ -83,83 +141,85 @@
 
     <main class="max-w-2xl mx-auto px-4 pt-6 space-y-6">
         
-        <!-- Novo Topo (Hero Section Apple-like) -->
-        <section class="fade-in flex flex-col items-center text-center pt-4 pb-4 relative">
-            <!-- Efeito de Brilho de Fundo (Glow) -->
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-48 bg-brand-green/20 blur-[50px] rounded-full pointer-events-none z-0"></div>
+        <!-- Área que será capturada e transformada em imagem ao compartilhar -->
+        <div id="capture-area" class="bg-[#f5f5f7] rounded-3xl pb-4">
             
-            <!-- Ilustração Interativa do Novo RG (Feita em CSS para máxima performance) -->
-            <div class="relative w-[280px] h-[170px] mb-8 transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 ease-out z-10 group cursor-default">
-                <!-- Sombra Dinâmica -->
-                <div class="absolute inset-0 bg-black/15 translate-y-6 blur-xl rounded-2xl group-hover:translate-y-8 group-hover:blur-2xl transition-all duration-500"></div>
+            <!-- Logo exclusiva para a foto gerada (fica escondida no site normal) -->
+            <div class="hidden text-center mb-6 pt-4" id="logo-for-capture">
+                <img src="https://saojosedobelmonte.pe.gov.br/new/wp-content/uploads/2025/01/Logo-Prefeitura-de-Belmonte-01.png" 
+                     alt="Prefeitura" class="h-16 mx-auto object-contain">
+            </div>
+
+            <!-- Novo Topo (Hero Section Apple-like) -->
+            <section class="fade-in flex flex-col items-center text-center pt-4 pb-4 relative">
                 
-                <!-- Estrutura do Documento -->
-                <div class="absolute inset-0 bg-[#f8fcf9] rounded-2xl border border-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col">
+                <!-- Cartão RG Animado (Corrigido: Adicionado tamanho fixo e posicionado corretamente) -->
+                <div class="relative w-[280px] h-[175px] bg-[#f8fcf9] rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col mb-8 transform transition-all duration-500 hover:scale-105 hover:-rotate-2 cursor-default group">
                     
                     <!-- Cabeçalho Oficial do RG (Verde/Azul Gov) -->
-                    <div class="bg-gradient-to-r from-[#007038] via-[#008C4A] to-[#005AA5] h-[38px] w-full flex items-center px-4 relative overflow-hidden">
+                    <div class="bg-gradient-to-r from-[#007038] via-[#008C4A] to-[#005AA5] h-[40px] w-full flex items-center px-4 relative overflow-hidden shrink-0 rounded-t-2xl">
                         <!-- Brilho no cabeçalho -->
-                        <div class="absolute inset-0 bg-white/10 w-1/2 skew-x-[-20deg] translate-x-[-100%] group-hover:translate-x-[250%] transition-transform duration-1000"></div>
+                        <div class="absolute inset-0 bg-white/20 w-1/2 skew-x-[-20deg] translate-x-[-150%] group-hover:translate-x-[250%] transition-transform duration-1000"></div>
                         
                         <!-- Brasão Simplificado -->
-                        <div class="w-5 h-4 bg-yellow-400 rounded-sm mr-2.5 flex items-center justify-center shadow-sm relative overflow-hidden">
-                            <div class="absolute w-6 h-6 bg-brand-green rounded-full top-2"></div>
-                            <div class="w-2 h-2 bg-blue-600 rounded-full z-10 border-[1px] border-white"></div>
+                        <div class="w-6 h-5 bg-yellow-400 rounded-sm mr-3 flex items-center justify-center shadow-sm relative overflow-hidden shrink-0">
+                            <div class="absolute w-7 h-7 bg-brand-green rounded-full top-2"></div>
+                            <div class="w-2.5 h-2.5 bg-blue-600 rounded-full z-10 border-[1px] border-white"></div>
                         </div>
                         
                         <div class="flex flex-col text-left relative z-10">
-                            <span class="text-[7px] text-white font-bold leading-none tracking-wider shadow-sm">REPÚBLICA FEDERATIVA DO BRASIL</span>
-                            <span class="text-[5.5px] text-white/90 font-medium leading-none mt-[3px] tracking-widest">CARTEIRA DE IDENTIDADE NACIONAL</span>
+                            <span class="text-[8px] text-white font-bold leading-none tracking-wider shadow-sm">REPÚBLICA FEDERATIVA DO BRASIL</span>
+                            <span class="text-[6.5px] text-white/90 font-medium leading-none mt-1 tracking-widest">CARTEIRA DE IDENTIDADE NACIONAL</span>
                         </div>
                     </div>
 
                     <!-- Corpo do RG -->
-                    <div class="flex-1 p-3.5 flex gap-3.5 relative">
+                    <div class="flex-1 p-4 flex gap-4 relative overflow-hidden rounded-b-2xl">
                         <!-- Marca d'água de Segurança (Digital) -->
-                        <i data-lucide="fingerprint" class="absolute inset-0 m-auto w-24 h-24 text-green-700/5 -z-0"></i>
+                        <i data-lucide="fingerprint" class="absolute inset-0 m-auto w-28 h-28 text-green-700/5 z-0"></i>
                         
                         <!-- Espaço da Foto -->
-                        <div class="w-[60px] h-[75px] bg-slate-200/80 rounded-md border border-slate-300 flex-shrink-0 flex items-center justify-center relative z-10 shadow-sm">
+                        <div class="w-[65px] h-[85px] bg-slate-200/80 rounded-md border border-slate-300 flex-shrink-0 flex items-center justify-center relative z-10 shadow-sm overflow-hidden">
                             <i data-lucide="user" class="w-8 h-8 text-slate-400"></i>
                         </div>
                         
                         <!-- Dados Simulados -->
-                        <div class="flex-1 py-1 flex flex-col gap-2.5 z-10">
+                        <div class="flex-1 py-1 flex flex-col gap-3 z-10 justify-center">
                             <div>
-                                <div class="text-[5px] text-slate-400 font-bold uppercase mb-[3px] tracking-wider">Nome</div>
-                                <div class="h-2.5 w-full bg-slate-700/80 rounded-sm"></div>
+                                <div class="text-[6px] text-slate-400 font-bold uppercase mb-[2px] tracking-wider">Nome</div>
+                                <div class="h-2 w-full bg-slate-700/70 rounded-sm"></div>
+                                <div class="h-2 w-2/3 bg-slate-700/70 rounded-sm mt-1"></div>
                             </div>
-                            <div class="flex gap-2.5">
+                            <div class="flex gap-3">
                                 <div class="flex-1">
-                                    <div class="text-[5px] text-slate-400 font-bold uppercase mb-[3px] tracking-wider">CPF</div>
-                                    <div class="h-2.5 w-full bg-slate-700/80 rounded-sm"></div>
+                                    <div class="text-[6px] text-slate-400 font-bold uppercase mb-[2px] tracking-wider">CPF</div>
+                                    <div class="h-2 w-full bg-slate-700/70 rounded-sm"></div>
                                 </div>
-                                <div class="w-10">
-                                    <div class="text-[5px] text-slate-400 font-bold uppercase mb-[3px] tracking-wider">Nascimento</div>
-                                    <div class="h-2.5 w-full bg-slate-700/80 rounded-sm"></div>
+                                <div class="w-12">
+                                    <div class="text-[6px] text-slate-400 font-bold uppercase mb-[2px] tracking-wider">Nascimento</div>
+                                    <div class="h-2 w-full bg-slate-700/70 rounded-sm"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Selo/QR Code (Elemento em destaque - vazando pra fora) -->
+                    <div class="absolute -bottom-4 -right-4 w-14 h-14 bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-slate-100 flex items-center justify-center transform rotate-6 group-hover:rotate-12 transition-transform z-20">
+                        <i data-lucide="qr-code" class="w-8 h-8 text-slate-800"></i>
+                    </div>
                 </div>
-                
-                <!-- Selo/QR Code (Elemento em destaque) -->
-                <div class="absolute -bottom-2 -right-2 w-11 h-11 bg-white rounded-xl shadow-lg border border-slate-100 flex items-center justify-center transform rotate-3 group-hover:rotate-6 transition-transform">
-                    <i data-lucide="qr-code" class="w-6 h-6 text-slate-800"></i>
-                </div>
-            </div>
 
-            <!-- Título Otimizado e Apresentação -->
-            <div class="z-10 relative">
-                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
-                    Seu novo RG <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-[#1b7a21]">está pronto!</span>
-                </h1>
-                <p class="text-slate-500 leading-relaxed text-[16px] max-w-sm mx-auto font-medium">
-                    A espera acabou. Os documentos solicitados já foram emitidos e aguardam sua retirada.
-                </p>
-            </div>
-        </section>
+                <div class="z-10 relative px-4">
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                        Seu novo RG <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-[#1b7a21]">está pronto!</span>
+                    </h1>
+                    <p class="text-slate-500 leading-relaxed text-[16px] max-w-sm mx-auto font-medium">
+                        A espera acabou. Os documentos solicitados já foram emitidos e aguardam sua retirada.
+                    </p>
+                </div>
+            </section>
+        </div>
 
         <!-- Informações de Retirada (Cards em Grid) -->
         <section class="fade-in grid grid-cols-1 md:grid-cols-2 gap-4" style="animation-delay: 0.1s;">
@@ -231,9 +291,10 @@
     </main>
 
     <!-- Botão Flutuante de Compartilhar (Estilo Apple) -->
-    <button onclick="compartilhar()" class="fixed bottom-6 left-1/2 -translate-x-1/2 glass shadow-apple-lg border border-white/20 text-slate-800 rounded-full px-6 py-3.5 flex items-center space-x-2 active:scale-95 transition-transform z-50">
-        <i data-lucide="share" class="w-5 h-5 text-brand-orange"></i>
-        <span class="font-medium text-[15px]">Avisar Amigos</span>
+    <button id="shareBtn" onclick="compartilhar()" class="fixed bottom-6 left-1/2 -translate-x-1/2 glass shadow-apple-lg border border-white/20 text-slate-800 rounded-full px-6 py-3.5 flex items-center space-x-2 active:scale-95 transition-all duration-300 z-50">
+        <i data-lucide="share" class="w-5 h-5 text-brand-orange" id="shareIcon"></i>
+        <i data-lucide="loader-2" class="w-5 h-5 text-brand-green hidden animate-spin" id="loadingIcon"></i>
+        <span class="font-medium text-[15px]" id="shareBtnText">Avisar Amigos</span>
     </button>
 
     <script>
@@ -410,21 +471,86 @@
             inputBusca.focus();
         });
 
-        // Função Nativa de Compartilhamento
-        function compartilhar() {
-            const dados = {
+        // Função Nativa e Inteligente de Compartilhamento (Gera Imagem + Texto)
+        async function compartilhar() {
+            const btn = document.getElementById('shareBtn');
+            const btnText = document.getElementById('shareBtnText');
+            const shareIcon = document.getElementById('shareIcon');
+            const loadingIcon = document.getElementById('loadingIcon');
+            const originalText = btnText.innerText;
+            
+            const dadosCompartilhamento = {
                 title: 'RGs Prontos - São José do Belmonte',
-                text: 'Confira a lista de pessoas que já podem retirar o novo RG no Centro Comercial Adeilson Alves Feitosa!',
-                url: window.location.href
+                text: '📢 Seu Novo RG está pronto! Confira a lista de pessoas que já podem retirar o documento no Centro Comercial.',
+                url: window.location.href // A URL que a pessoa vai clicar
             };
 
-            if (navigator.share) {
-                navigator.share(dados)
-                    .catch((error) => console.log('Erro ao compartilhar', error));
-            } else {
-                // Fallback para copiar o link se o Web Share API não for suportado
+            try {
+                // Estado de carregamento visual
+                btnText.innerText = "Preparando card...";
+                shareIcon.classList.add('hidden');
+                loadingIcon.classList.remove('hidden');
+                btn.classList.add('pointer-events-none', 'opacity-90');
+
+                // Prepara a área de captura (exibe a logo temporariamente para a foto)
+                const captureArea = document.getElementById('capture-area');
+                const logoCapture = document.getElementById('logo-for-capture');
+                logoCapture.classList.remove('hidden');
+
+                // Tira um "Print" programático do belo RG e da Logo
+                const canvas = await html2canvas(captureArea, {
+                    scale: 2, // Resolução HD
+                    backgroundColor: '#f5f5f7',
+                    useCORS: true, // Necessário para imagens externas (logo)
+                    logging: false
+                });
+
+                // Esconde a logo novamente após a foto
+                logoCapture.classList.add('hidden');
+
+                // Converte a foto em um arquivo digital
+                canvas.toBlob(async (blob) => {
+                    const file = new File([blob], "RG-Belmonte.png", { type: "image/png" });
+                    
+                    // Verifica se o celular do usuário suporta enviar a Imagem + Link juntos
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                            ...dadosCompartilhamento,
+                            files: [file] // Anexa a imagem linda gerada na hora!
+                        });
+                    } else if (navigator.share) {
+                        // Fallback: celular só suporta enviar texto/link
+                        await navigator.share(dadosCompartilhamento);
+                    } else {
+                        // Fallback: Copiar para área de transferência (PC)
+                        copiarTexto(dadosCompartilhamento);
+                    }
+                    
+                    restaurarBotao();
+                }, 'image/png');
+
+            } catch (error) {
+                console.error('Erro ao gerar imagem:', error);
+                
+                // Em caso de falha de renderização, compartilha o texto normalmente
+                if (navigator.share) {
+                    navigator.share(dadosCompartilhamento).catch(console.error);
+                } else {
+                    copiarTexto(dadosCompartilhamento);
+                }
+                restaurarBotao();
+            }
+
+            function restaurarBotao() {
+                btnText.innerText = originalText;
+                shareIcon.classList.remove('hidden');
+                loadingIcon.classList.add('hidden');
+                btn.classList.remove('pointer-events-none', 'opacity-90');
+            }
+
+            function copiarTexto(dados) {
                 navigator.clipboard.writeText(`${dados.text} Veja a lista: ${dados.url}`).then(() => {
-                    alert('Link copiado para a área de transferência! Envie para seus amigos.');
+                    alert('Link copiado! Envie para seus contatos e nas redes sociais.');
                 });
             }
         }
