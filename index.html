@@ -145,9 +145,9 @@
         <div id="capture-area" class="bg-[#f5f5f7] rounded-3xl pb-4">
             
             <!-- Logo exclusiva para a foto gerada (fica escondida no site normal) -->
-            <div class="hidden text-center mb-6 pt-4" id="logo-for-capture">
+            <div id="logo-for-capture" class="hidden flex-col items-center justify-center mb-4 pt-8">
                 <img src="https://saojosedobelmonte.pe.gov.br/new/wp-content/uploads/2025/01/Logo-Prefeitura-de-Belmonte-01.png" 
-                     alt="Prefeitura" class="h-16 mx-auto object-contain">
+                     alt="Prefeitura" class="h-14 object-contain">
             </div>
 
             <!-- Novo Topo (Hero Section Apple-like) -->
@@ -212,7 +212,7 @@
                 <div class="z-10 relative px-4">
                     <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
                         Seu novo RG <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-[#1b7a21]">está pronto!</span>
+                        <span class="text-brand-green">está pronto!</span>
                     </h1>
                     <p class="text-slate-500 leading-relaxed text-[16px] max-w-sm mx-auto font-medium">
                         A espera acabou. Os documentos solicitados já foram emitidos e aguardam sua retirada.
@@ -495,7 +495,13 @@
                 // Prepara a área de captura (exibe a logo temporariamente para a foto)
                 const captureArea = document.getElementById('capture-area');
                 const logoCapture = document.getElementById('logo-for-capture');
+                
+                // Mostra a logo e alinha ao centro
                 logoCapture.classList.remove('hidden');
+                logoCapture.classList.add('flex');
+
+                // Aguarda 200 milissegundos para garantir que o navegador desenhou a logo na tela antes da foto
+                await new Promise(resolve => setTimeout(resolve, 200));
 
                 // Tira um "Print" programático do belo RG e da Logo
                 const canvas = await html2canvas(captureArea, {
@@ -507,6 +513,7 @@
 
                 // Esconde a logo novamente após a foto
                 logoCapture.classList.add('hidden');
+                logoCapture.classList.remove('flex');
 
                 // Converte a foto em um arquivo digital
                 canvas.toBlob(async (blob) => {
