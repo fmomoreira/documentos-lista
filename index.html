@@ -274,9 +274,27 @@
             </div>
         </section>
 
-        <!-- Container da Lista -->
+        <!-- Container da Lista de Documentos Prontos -->
         <section id="listaNomes" class="fade-in space-y-6" style="animation-delay: 0.3s;">
             <!-- A lista será gerada via JavaScript aqui -->
+        </section>
+
+        <!-- Seção: Pendência de Documentos -->
+        <section class="fade-in mt-12" style="animation-delay: 0.4s;">
+            <div class="flex flex-col items-center text-center mb-6">
+                <div class="bg-amber-50 p-4 rounded-full mb-4">
+                    <i data-lucide="alert-triangle" class="w-8 h-8 text-amber-500"></i>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+                    Pendência de <span class="text-amber-500">Documentos</span>
+                </h2>
+                <p class="text-slate-500 leading-relaxed text-[15px] max-w-sm mx-auto font-medium">
+                    As pessoas abaixo precisam regularizar a documentação para que o RG possa ser emitido.
+                </p>
+            </div>
+            <div id="listaPendencias" class="space-y-6">
+                <!-- A lista de pendências será gerada via JavaScript aqui -->
+            </div>
         </section>
 
         <!-- Estado de Busca Vazia -->
@@ -301,57 +319,182 @@
         // Inicializa Ícones
         lucide.createIcons();
 
-        // Dados extraídos da solicitação
+        // Dados extraídos da solicitação - Lista ATUALIZADA de documentos prontos
         const nomesBrutos = [
-            "Acirleide maria Ferreira Santos", "Adrieli Mariane Alves dos Santos", "Aguida aureliano da Cruz", 
-            "Alcione Pires de Barros", "Alexia maria Ferreira Lima", "Ana beatris Barboza santos", 
-            "Anaiza ana de Sousa Silva", "Antonio de Carvalho Santos", "Antônio Lopes Benedito", 
-            "Antony Bernardo Pereira da Silva", "Aryelly maria da Silva feitosa", "Ayane Aparecida Braga da Silva",
+            "Acirleide maria Ferreira Santos", "Adriana da Silva", "Adrieli Mariane Alves dos Santos", 
+            "Aguida aureliano da Cruz", "Alcione Pires de Barros", "Alexia maria Ferreira Lima", 
+            "Ana beatris Barboza santos", "Anaiza ana de Sousa Silva", "Antonio de Carvalho Santos", 
+            "Antony Bernardo Pereira da Silva", "Antônio Lopes Benedito", "Aristotys ramon alves feitosa", 
+            "Aryelly maria da Silva feitosa", "Auricelia Nunes de Barros", "Ayane Aparecida Braga da Silva",
             "Beatriz Bezerra dos Santos", "Benjamin Nicolas lorenzo Pereira Araújo Meneses",
-            "Cícero Alex dos Santos Mota", "Cícero Bezerra dos Santos", "Cícero Rodrigues dos Santos", 
-            "Cláudio jose da Silva Leite", "Cleciovania maria Bezerra Pereira dos Santos", "Cleidiana Pereira de Lima", 
-            "Cleidilene dos Santos", "Cristina grasiely da Silva",
-            "Damiana de Carvalho Lopes", "Damiana de Souza Silva", "Damião Pereira de Oliveira", "Deailton Júlio",
+            "Cleciovania maria Bezerra Pereira dos Santos", "Cleidiana Ferreira Leandro", "Cleidiana Pereira de Lima", 
+            "Cleidilene dos Santos", "Cláudio jose da Silva Leite", "Constança Gomes de Carvalho Silva", 
+            "Cristina grasiely da Silva", "Cícero Alex dos Santos Mota", "Cícero Batista da Silva", 
+            "Cícero Bezerra dos Santos", "Cícero Rodrigues dos Santos",
+            "Damiana de Carvalho Lopes", "Damiana de Souza Silva", "Damiana paisinho de Almeida", 
+            "Damião Pereira de Oliveira", "Daniel lucas Santos Amaro", "Deailton Júlio",
             "Edlania precilia de Souza Santos", "Edvalda Barbosa da Silva Alcântara", "Elda Alves da Silva Santos", 
-            "Eliane Vieira da Silva", "Emília Pereira da Silva", "Emerson Inácio dos Santos", "Espedito esperdiao da Silva",
-            "Francisca edilma Alves de Moura Santos", "Francisca Edineide da Silva sobrinho", "Francisca maria da Conceição", 
-            "Francisca minervina de Sousa", "Francisca Natália da Cruz Pereira", "Francisca Soares de Moura", 
-            "Francisca Zilda baia", "Francisco Cícero da Silva", "Francisco de Assis Vieira", "Francisco Elias Silva", 
-            "Francisco Mota da Silva", "Francisco Sebastião de Lima",
+            "Eliane Vieira da Silva", "Emerson Inácio dos Santos", "Emília Pereira da Silva", 
+            "Espedito esperdiao da Silva", "Everalda Leite Pereira",
+            "Fernanda Karla Félix da Silva", "Francisca da Cruz Santos", "Francisca Davi da Silva", 
+            "Francisca edilma Alves de Moura Santos", "Francisca Edineide da Silva sobrinho", 
+            "Francisca maria da Conceição", "Francisca minervina de Sousa", "Francisca Natália da Cruz Pereira", 
+            "Francisca Soares de Moura", "Francisca Zilda baia", "Francisco Cícero da Silva", 
+            "Francisco de Assis Vieira", "Francisco Elias Silva", "Francisco Júlio da Silva", 
+            "Francisco Mota da Silva", "Francisco Orlando Pereira", "Francisco Sebastião de Lima", 
+            "Fábio Mendes da Cruz",
+            "Genildo Cardoso da Silva",
             "Heitor Davi Ferreira Nunes", "Helena maria Gomes Silva", "Heleno Antônio da Silva", 
             "Hemerson Diego de Carvalho Santos", "Henzo Gabriel Cassiano da Silva",
-            "Inês Aquino Lima", "Irmar Lopes da Silva", "Isaulina Alves de Carvalho Santos", "Izadora Gomes da Silva",
-            "Jacinta maria da Silva", "João lucas panta de Lima", "João Pedro da Silva", "Jose adrian Marques da Silva", 
-            "José Armando Pereira da Silva", "José Emerson Nascimento da Silva Santos", "José Gomes de Sousa", 
+            "Inês Aquino Lima", "Irmar Lopes da Silva", "Isaulina Alves de Carvalho Santos", 
+            "Iva Henrique de Andrade Barros", "Izadora Gomes da Silva", "Izete Silva Santos Magalhães",
+            "Jacinta maria da Silva", "Jorge da Silva aleixo", "Jose adrian Marques da Silva", 
+            "Josefa Corina do Nascimento", "Josefa Xavier do Nascimento Pereira", "Josiano de Sousa", 
+            "Josué Timóteo de Moura", "José Antônio dos Santos", "José Armando Pereira da Silva", 
+            "José Arnaldo de Oliveira", "José Emerson Nascimento da Silva Santos", "José Gomes de Sousa", 
             "José Heitor de Souza Bezerra Santos", "José Ismael Cândido dos Santos Leite", "José Leite Morais", 
-            "José Luiz da Silva", "José Rodrigues Macedo filho", "José willian Bezerra de Lima", "Josefa Corina do Nascimento", 
-            "Josiano de Sousa", "Josué Timóteo de Moura", "Júlio César Nunes Carvalho",
+            "José Luiz da Silva", "José Nildo de Sousa", "José Rodrigues Macedo filho", 
+            "José willian Bezerra de Lima", "João lucas de Souza Ferreira", "João lucas panta de Lima", 
+            "João Pedro da Silva", "Júlio César Nunes Carvalho",
             "Kallinina mayra Lacerda Rodrigues Gonzaga da Silva", "Karla vitória de Souza Silva", 
             "Karoline kethelin Alves da Silva", "Katinaide panta da Silva", "Kaua nunes Nascimento", 
             "Keillyane gabrielle Alves do Nascimento", "Kelly maria Pereira dos Santos",
             "Leidiane de Medeiros Lima", "Luana Nogueira Lopes", "Luana Silvino da Silva", 
-            "Luciana do Nascimento Oliveira", "Luiz durino dos Santos", "Luiz Nicacio da Silva",
+            "Lucenildo Soares da Silva", "Luciana do Nascimento Oliveira", "Luiz durino dos Santos", 
+            "Luiz Nicacio da Silva",
             "Manoel João de Souza", "Manoel Leonardo de Araújo", "Manoel Romão de Oliveira neto", 
             "Marcos Antônio da Silva", "Maria Alice dos Santos", "Maria antoniete ramalho Pereira", 
             "Maria Aparecida dos Santos", "Maria cicera de Souza Reinaldo Pereira", "Maria das Dores de Lima", 
             "Maria das Dores dos Santos", "Maria das Dores Leite da Silva leal de Figueiredo", 
-            "Maria das virgens novais de Alencar", "Maria de Fátima maia de Medeiros", "Maria de Fátima Oliveira de Lima", 
-            "Maria eduarda Gomes Silva", "Maria êlane de Medeiros Lima Silva", "Maria Eunice de Lima Moura Oliveira", 
-            "Maria evillyn de Sousa Santos", "Maria Francisca de Figueiredo", "Maria Heloísa de Andrade", 
-            "Maria jose da Silva Barbosa", "Maria José Gomes de Oliveira", "Maria Larissa Xavier Venâncio", 
-            "Maria lenice bezerrq da Costa", "Maria miqueline Nunes", "Maria ozoni de pontes cabral", 
-            "Maria Sabrina Pereira da Silva", "Maria vitória Mendes Oliveira", "Maria zelina de Souza Ferreira", 
-            "Mariana Soares cena", "Matheus Ferreira lucas",
+            "Maria das virgens novais de Alencar", "Maria de Fátima maia de Medeiros", 
+            "Maria de Fátima Oliveira de Lima", "Maria de Lourdes da Silva Leite", 
+            "Maria de Lourdes Pereira da Silva", "Maria do Carmo de Figueredo Oliveira", 
+            "Maria eduarda Gomes Silva", "Maria eduarda Silva Timóteo", "Maria Eunice de Lima Moura Oliveira", 
+            "Maria evillyn de Sousa Santos", "Maria Francisca de Figueiredo", "Maria Helena da Silva Amaral", 
+            "Maria Heloísa de Andrade", "Maria Isabela Queiroz Nunes", "Maria jose da Silva Barbosa", 
+            "Maria José Gomes de Oliveira", "Maria Larissa Xavier Venâncio", "Maria lenice bezerrq da Costa", 
+            "Maria miqueline Nunes", "Maria neli de Oliveira", "Maria ozoni de pontes cabral", 
+            "Maria Sabrina Pereira da Silva", "Maria sibelly Ferreira damos", "Maria Sueli dos Santos Barros", 
+            "Maria vilani Santos", "Maria vitória Mendes Oliveira", "Maria zelina de Souza Ferreira", 
+            "Maria êlane de Medeiros Lima Silva", "Mariana Soares cena", "Matheus Ferreira lucas", 
+            "Márcia Gomes da Cruz",
             "Osmano Cordeiro Mariano",
-            "Pedro Henrique Alves de Souza", "Pedro Miguel da Silva Rodrigues Macedo",
+            "Pedro Arthur Souza Silva", "Pedro Henrique Alves de Souza", "Pedro Miguel da Silva Rodrigues Macedo",
             "Ryan de Melo Aquino",
-            "Sandra de Almeida Barros", "Sania maria dos Santos",
+            "Sandra de Almeida Barros", "Sania maria dos Santos", "Severino Benedito do Nascimento", 
+            "Sueli Pereira da Silva",
             "Talita michaelly Nicolau dos Santos", "Talyson Micael Nicolau dos Santos",
             "Valdenice maria da Silva Lima", "Valdenice Martins de Oliveira", "Vandelice vandete dos Santos", 
             "Victor Gabriel Pereira Lopes",
             "Wilma Mirely Soares Brito",
             "Yuri kawan Sales dos Santos",
-            "Zilma Vandelice dos Santos"
+            "Zilma Vandelice dos Santos",
+            "Aguineide da Silva", "Antônio Farias de Oliveira", "Arlindo Nicarcio da Silva",
+            "Aurení Maria de Jesus", "Carlos José Sobreira de Lima", "Cícero Batista dos Santos",
+            "Cícero Francisco da Silva", "Cícero Soares da Silva", "Genir Maria dos Santos Oliveira",
+            "João de Sousa Pereira", "José Antônio Félix Filho", "José Luiz da Silva Filho",
+            "Maria da Penha da Silva", "Maria das Dores da Silva", "Maria de Lourdes da Conceição",
+            "Maria de Souza Bezerra", "Maria Maia de Medeiros", "Maria Vanda da Conceição Silva",
+            "Márcia Nubia Rocha", "Valdeci Pires Nogueira Barbosa", "Valdecir Luzia de Sá"
+        ];
+
+        // Lista de pessoas com pendência de documentos
+        const pendenciasBrutas = [
+            { nome: "Adelmo Nunes de Carvalho", pendencia: "Digital" },
+            { nome: "Aloizo Guabiraba de Lima", pendencia: "Foto" },
+            { nome: "Amanda de Carvalho Melo", pendencia: "Receita" },
+            { nome: "Ana Cecília da Silva", pendencia: "Duas pessoas com o mesmo número de matrícula, confirmar com o cartório" },
+            { nome: "Ana Livia da Silva Rocha", pendencia: "Digital" },
+            { nome: "Ana Luiza Oliveira Martins", pendencia: "Certidão" },
+            { nome: "Anna Julia da S. Cavalcante", pendencia: "Digital" },
+            { nome: "Anne Silva Feitosa", pendencia: "Digital" },
+            { nome: "Antonia Celina da Conceição", pendencia: "Local de Nascimento" },
+            { nome: "Antonio Carlos de Jesus Santos", pendencia: "2ª Via da Certidão" },
+            { nome: "Arthur da Silva Pereira", pendencia: "Laudo Atualizado" },
+            { nome: "Cicera Candido", pendencia: "Foto" },
+            { nome: "Cicera de Sousa Santos", pendencia: "Receita" },
+            { nome: "Cicera Vitoria Cabral dos Santos", pendencia: "Foto" },
+            { nome: "Cicero Aleixandro dos Santos Mota", pendencia: "Foto" },
+            { nome: "Constança Gomes de Carvalho", pendencia: "Atualizar RFB" },
+            { nome: "Cícero dos Santos Júnior", pendencia: "Apresentar CPF do Responsável" },
+            { nome: "Cícero Rodrigues dos Santos", pendencia: "Foto" },
+            { nome: "Damiana Janilma R. da Silva", pendencia: "Certidão" },
+            { nome: "Damiana Joaquina de Souza", pendencia: "Certidão" },
+            { nome: "Davi Luiz T. Lopes Sobreira", pendencia: "Doc. da Mãe" },
+            { nome: "Eduardo da Silva Santos", pendencia: "Assinatura" },
+            { nome: "Eliana da S. Souza", pendencia: "Receita" },
+            { nome: "Emerson David de Souza Delmiano", pendencia: "Certidão" },
+            { nome: "Emylly Sofia da Silva", pendencia: "Doc. Responsável" },
+            { nome: "Enzo dos Santos Silva", pendencia: "Foto" },
+            { nome: "Fabio Mendes da Cruz", pendencia: "Digital" },
+            { nome: "Francileide Mariano da Silva", pendencia: "Foto" },
+            { nome: "Francilene Pereira de Sousa", pendencia: "Foto" },
+            { nome: "Francisca Maria Damião", pendencia: "Foto" },
+            { nome: "Francisco de Assis Santos Silva", pendencia: "Doc." },
+            { nome: "Francisco Jose de Sousa", pendencia: "Certidão Verso" },
+            { nome: "Francisco José Gondim de Sá", pendencia: "Atualizar RFB" },
+            { nome: "Genildo Cardoso da Silva", pendencia: "Foto" },
+            { nome: "Genilson F. da Silva", pendencia: "Certidão" },
+            { nome: "Ivoneide Barboza dos Santos", pendencia: "Foto" },
+            { nome: "Izete Silva Santos Magalhães", pendencia: "Assinatura" },
+            { nome: "Jacinta Maria da Silva Araujo", pendencia: "Receita Federal" },
+            { nome: "Jaillane Vitória da Silva Andrade", pendencia: "Atualizar RFB" },
+            { nome: "Jamily Ferreira Silva", pendencia: "CPF Responsável" },
+            { nome: "Jeferson Heitor Morais Lima", pendencia: "Digital" },
+            { nome: "Joaquim P. de Souza", pendencia: "Nome da Mãe na Certidão" },
+            { nome: "Jose Armando Pereira da Silva", pendencia: "Certidão" },
+            { nome: "Jose Pedro da Rocha", pendencia: "Foto" },
+            { nome: "Joseja Cecilia da Conceição", pendencia: "Foto" },
+            { nome: "Josemar Juraci da Silva", pendencia: "Foto" },
+            { nome: "José Abraão Pereira Dionisio", pendencia: "Receita" },
+            { nome: "José Heitor de Souza Bezerra Santos", pendencia: "Foto" },
+            { nome: "João Alfredo Gonçalves Brito", pendencia: "Assinatura" },
+            { nome: "João José Roberto da Silva", pendencia: "Foto" },
+            { nome: "Lorena Suekken Moura Silva", pendencia: "Foto" },
+            { nome: "Lucas Davi P. dos Santos", pendencia: "Digital" },
+            { nome: "Lucineide de Ouza Santos", pendencia: "Doc. Pai" },
+            { nome: "Luciola Elaine de Barros", pendencia: "Doc." },
+            { nome: "Luiz Manoel da Silva", pendencia: "Certidão" },
+            { nome: "Luzinete Maria da Conceição", pendencia: "Digital" },
+            { nome: "Marcelo Ferreira Paulo Matos", pendencia: "Receita" },
+            { nome: "Maria Allanira Ferreira", pendencia: "Foto" },
+            { nome: "Maria Ana da Silva", pendencia: "Digital" },
+            { nome: "Maria Aparecida L. da C. Soares", pendencia: "Doc." },
+            { nome: "Maria Aparecida Roseno dos Santos", pendencia: "Apresentar CPF do Responsável" },
+            { nome: "Maria Cirlene Ferreira Félix", pendencia: "Atualizar RFB" },
+            { nome: "Maria das Dores dos Santos", pendencia: "Receita" },
+            { nome: "Maria de Fatima de Carvalho", pendencia: "Certidão" },
+            { nome: "Maria do Carmo Bezerra", pendencia: "Certidão" },
+            { nome: "Maria do Carmo Bezerra Oliveira", pendencia: "2ª Via Certidão" },
+            { nome: "Maria do Carmo L. da Cuz", pendencia: "Foto" },
+            { nome: "Maria do Céu B. Soares", pendencia: "DAE" },
+            { nome: "Maria do Socoro Silva", pendencia: "Digital" },
+            { nome: "Maria Eunice Barbosa", pendencia: "Certidão" },
+            { nome: "Maria Helena Juvenal da Silva", pendencia: "DAE" },
+            { nome: "Maria Jose dos Santos Silva", pendencia: "Foto" },
+            { nome: "Maria Julia T.L. Sobreira", pendencia: "Receita" },
+            { nome: "Maria Lopes de Souza", pendencia: "Certidão" },
+            { nome: "Maria Lucélia da Silva", pendencia: "Matrícula Certidão Inválida" },
+            { nome: "Maria Marlene C. dos Santos", pendencia: "Certidão" },
+            { nome: "Maria Ozani de P. Cabral", pendencia: "Receita" },
+            { nome: "Maria Pereira de Souza", pendencia: "Certidão" },
+            { nome: "Maria Socorro Oliveira dos Santos", pendencia: "Apresentar Declaração Primeira Via" },
+            { nome: "Maria Valdelice da C. Silva", pendencia: "Foto" },
+            { nome: "Marinalva Santos Ramos Vieira", pendencia: "Digital" },
+            { nome: "Marlene da Silva Barboza", pendencia: "Atualizar RFB" },
+            { nome: "Paulo de Sousa Pereira", pendencia: "Foto" },
+            { nome: "Raimunda Maria da Conceição", pendencia: "Certidão" },
+            { nome: "Rayssa Ketthlly Alexandre Mendes", pendencia: "Foto" },
+            { nome: "Rhilary Emanuele da C. Lima", pendencia: "Foto" },
+            { nome: "Rosa Maria de S. Lopes", pendencia: "DAE" },
+            { nome: "Rosa Maria de Sousa Lopes", pendencia: "Pagar Taxa DAE" },
+            { nome: "Samara Maria Pereira da Silva", pendencia: "Foto" },
+            { nome: "Tereziha Alves dos Santos", pendencia: "Certidão" },
+            { nome: "Therezinha Bília da Conceição", pendencia: "Atualizar RFB" },
+            { nome: "Vandelice Vandete dos Santos", pendencia: "Apresentar documento que a requerente usa para se identificar" },
+            { nome: "Vandelice Vandete dos Santos", pendencia: "RG Atual" },
+            { nome: "Vicente Delfino Neto", pendencia: "1ª Via do RG" },
+            { nome: "Yasmin Lavine de A. Severo", pendencia: "Receita" }
         ];
 
         // Função para formatar os nomes corretamente (Title Case) garantindo organização
@@ -439,6 +582,66 @@
         // Renderização Inicial
         renderizarLista(nomesAgrupados);
 
+        // ========== SEÇÃO DE PENDÊNCIAS ==========
+        const containerPendencias = document.getElementById('listaPendencias');
+
+        // Agrupa pendências pela primeira letra do nome
+        function agruparPendencias(pendencias) {
+            return pendencias.reduce((acc, item) => {
+                let letra = item.nome.charAt(0).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+                if (!acc[letra]) acc[letra] = [];
+                acc[letra].push(item);
+                return acc;
+            }, {});
+        }
+
+        const pendenciasAgrupadas = agruparPendencias(pendenciasBrutas);
+
+        function renderizarPendencias(grupos) {
+            containerPendencias.innerHTML = '';
+            const letras = Object.keys(grupos).sort();
+
+            if (letras.length === 0) return;
+
+            letras.forEach(letra => {
+                const items = grupos[letra];
+                const grupoDiv = document.createElement('div');
+                grupoDiv.className = 'relative';
+
+                const headerLetra = document.createElement('h2');
+                headerLetra.className = 'sticky top-[130px] z-30 inline-block bg-[#f5f5f7]/95 backdrop-blur-sm text-amber-500 font-bold text-[17px] py-1 px-1 mb-2 w-full border-b border-slate-200/60';
+                headerLetra.textContent = letra;
+                grupoDiv.appendChild(headerLetra);
+
+                const listaCard = document.createElement('div');
+                listaCard.className = 'bg-white rounded-[20px] shadow-sm border border-slate-200/60 overflow-hidden';
+
+                const ul = document.createElement('ul');
+                ul.className = 'divide-y divide-slate-100';
+
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'px-5 py-3.5 flex items-center space-x-3 active:bg-slate-50 transition-colors';
+                    li.innerHTML = `
+                        <div class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-500 text-sm font-medium shrink-0">
+                            ${letra}
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                            <span class="text-[16px] text-slate-800 font-medium tracking-tight">${item.nome}</span>
+                            <span class="text-[13px] text-amber-600 font-medium mt-0.5 truncate">Pendência: ${item.pendencia}</span>
+                        </div>
+                    `;
+                    ul.appendChild(li);
+                });
+
+                listaCard.appendChild(ul);
+                grupoDiv.appendChild(listaCard);
+                containerPendencias.appendChild(grupoDiv);
+            });
+        }
+
+        renderizarPendencias(pendenciasAgrupadas);
+
         // Lógica de Busca
         inputBusca.addEventListener('input', (e) => {
             const termo = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -452,6 +655,7 @@
 
             if (!termo) {
                 renderizarLista(nomesAgrupados);
+                renderizarPendencias(pendenciasAgrupadas);
                 return;
             }
 
@@ -460,7 +664,13 @@
                 return nomeNormalizado.includes(termo);
             });
 
+            const pendenciasFiltradas = pendenciasBrutas.filter(item => {
+                const nomeNormalizado = item.nome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                return nomeNormalizado.includes(termo);
+            });
+
             renderizarLista(agruparNomes(nomesFiltrados));
+            renderizarPendencias(agruparPendencias(pendenciasFiltradas));
         });
 
         // Limpar Busca
@@ -468,6 +678,7 @@
             inputBusca.value = '';
             btnLimpar.classList.add('hidden');
             renderizarLista(nomesAgrupados);
+            renderizarPendencias(pendenciasAgrupadas);
             inputBusca.focus();
         });
 
