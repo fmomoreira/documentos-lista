@@ -1,0 +1,14 @@
+configuar deplou automatizado no github
+
+quando eu comitar na main reodar todo fluxo necessario 
+la no deplois fazer o fecth passando a api key 
+busca os dados 
+gera os arquivos staticos
+otimiza imagens se tiver miniminifa tudo
+acessa os servidor
+faz o pull
+pega os arquivos prontos e otimizados na psta dist
+e manda para o www do nginx que esta configurado
+
+
+e esse fluxo deve ser automatizado e rodar automaticamente quando eu comitar na main

@@ -1,0 +1,44 @@
+---
+import { agruparNomes, normalizarBusca, prepararNomes } from '../lib/nomes';
+
+interface Props {
+  nomes: string[];
+}
+
+const { nomes } = Astro.props;
+const nomesLimpos = prepararNomes(nomes);
+const grupos = agruparNomes(nomesLimpos);
+const letras = Object.keys(grupos).sort();
+---
+
+<section
+  id="listaNomes"
+  class="fade-in space-y-6"
+  style="animation-delay: 0.3s;"
+  aria-label="Lista de cidadãos com RG pronto para retirada"
+>
+  {
+    letras.map((letra) => (
+      <div class="relative grupo-lista" data-grupo-lista>
+        <h2 class="sticky top-[130px] z-30 inline-block bg-[#f5f5f7]/95 backdrop-blur-sm text-brand-green font-bold text-[17px] py-1 px-1 mb-2 w-full border-b border-slate-200/60">
+          {letra}
+        </h2>
+        <div class="bg-white rounded-[20px] shadow-sm border border-slate-200/60 overflow-hidden">
+          <ul class="divide-y divide-slate-100">
+            {grupos[letra].map((nome) => (
+              <li
+                class="item-lista px-5 py-3.5 flex items-center space-x-3 active:bg-slate-50 transition-colors"
+                data-search-text={normalizarBusca(nome)}
+              >
+                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 text-sm font-medium shrink-0">
+                  {letra}
+                </div>
+                <span class="text-[16px] text-slate-800 font-medium tracking-tight">{nome}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    ))
+  }
+</section>

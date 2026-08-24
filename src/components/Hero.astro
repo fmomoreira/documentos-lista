@@ -1,0 +1,63 @@
+---
+import Logo from './Logo.astro';
+---
+
+<div id="capture-area" class="bg-[#f5f5f7] rounded-3xl pb-4">
+  <div id="logo-for-capture" class="hidden flex-col items-center justify-center mb-4 pt-8">
+    <Logo alt="Prefeitura" class="h-14 object-contain" width={240} height={72} loading="lazy" fetchpriority="low" />
+  </div>
+
+  <section class="fade-in flex flex-col items-center text-center pt-4 pb-4 relative">
+    <div class="relative w-[280px] h-[175px] bg-[#f8fcf9] rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col mb-8 transform transition-all duration-500 hover:scale-105 hover:-rotate-2 cursor-default group">
+      <div class="bg-gradient-to-r from-[#007038] via-[#008C4A] to-[#005AA5] h-[40px] w-full flex items-center px-4 relative overflow-hidden shrink-0 rounded-t-2xl">
+        <div class="absolute inset-0 bg-white/20 w-1/2 skew-x-[-20deg] translate-x-[-150%] group-hover:translate-x-[250%] transition-transform duration-1000"></div>
+        <div class="w-6 h-5 bg-yellow-400 rounded-sm mr-3 flex items-center justify-center shadow-sm relative overflow-hidden shrink-0">
+          <div class="absolute w-7 h-7 bg-brand-green rounded-full top-2"></div>
+          <div class="w-2.5 h-2.5 bg-blue-600 rounded-full z-10 border-[1px] border-white"></div>
+        </div>
+        <div class="flex flex-col text-left relative z-10">
+          <span class="text-[8px] text-white font-bold leading-none tracking-wider shadow-sm">REPÚBLICA FEDERATIVA DO BRASIL</span>
+          <span class="text-[6.5px] text-white/90 font-medium leading-none mt-1 tracking-widest">CARTEIRA DE IDENTIDADE NACIONAL</span>
+        </div>
+      </div>
+
+      <div class="flex-1 p-4 flex gap-4 relative overflow-hidden rounded-b-2xl">
+        <i data-lucide="fingerprint" class="absolute inset-0 m-auto w-28 h-28 text-green-700/5 z-0"></i>
+        <div class="w-[65px] h-[85px] bg-slate-200/80 rounded-md border border-slate-300 flex-shrink-0 flex items-center justify-center relative z-10 shadow-sm overflow-hidden">
+          <i data-lucide="user" class="w-8 h-8 text-slate-400"></i>
+        </div>
+        <div class="flex-1 py-1 flex flex-col gap-3 z-10 justify-center">
+          <div>
+            <div class="text-[6px] text-slate-400 font-bold uppercase mb-[2px] tracking-wider">Nome</div>
+            <div class="h-2 w-full bg-slate-700/70 rounded-sm"></div>
+            <div class="h-2 w-2/3 bg-slate-700/70 rounded-sm mt-1"></div>
+          </div>
+          <div class="flex gap-3">
+            <div class="flex-1">
+              <div class="text-[6px] text-slate-400 font-bold uppercase mb-[2px] tracking-wider">CPF</div>
+              <div class="h-2 w-full bg-slate-700/70 rounded-sm"></div>
+            </div>
+            <div class="w-12">
+              <div class="text-[6px] text-slate-400 font-bold uppercase mb-[2px] tracking-wider">Nascimento</div>
+              <div class="h-2 w-full bg-slate-700/70 rounded-sm"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute -bottom-4 -right-4 w-14 h-14 bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-slate-100 flex items-center justify-center transform rotate-6 group-hover:rotate-12 transition-transform z-20">
+        <i data-lucide="qr-code" class="w-8 h-8 text-slate-800"></i>
+      </div>
+    </div>
+
+    <div class="z-10 relative px-4">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+        Seu novo RG <br />
+        <span class="text-brand-green">está pronto!</span>
+      </h1>
+      <p class="text-slate-500 leading-relaxed text-[16px] max-w-sm mx-auto font-medium">
+        A espera acabou. Os documentos solicitados já foram emitidos e aguardam sua retirada.
+      </p>
+    </div>
+  </section>
+</div>

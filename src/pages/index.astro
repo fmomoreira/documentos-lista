@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Logo from '../components/Logo.astro';
+import Hero from '../components/Hero.astro';
+import InfoCards from '../components/InfoCards.astro';
+import ListaNomes from '../components/ListaNomes.astro';
+import ListaPendencias from '../components/ListaPendencias.astro';
+import { getLista } from '../lib/getLista';
+import { prepararNomes } from '../lib/nomes';
+import { RETIRADA } from '../lib/site';
+
+const lista = await getLista();
+const nomesLimpos = prepararNomes(lista.prontos);
+const totalNomes = nomesLimpos.length;
+
+const description = `Lista oficial atualizada de ${totalNomes} cidadãos com Carteira de Identidade Nacional (CIN/RG) pronta para retirada em São José do Belmonte, PE. Local: ${RETIRADA.local}, ${RETIRADA.horario}.`;
+---
+
+<Layout
+  description={description}
+  totalNomes={totalNomes}
+  dateModified={lista.atualizadoEm}
+>
+  <header
+    class="glass sticky top-0 z-50 border-b border-slate-200/60 pt-safe transition-all duration-300"
+    id="header"
+    data-html2canvas-ignore="true"
+  >
+    <div class="max-w-2xl mx-auto px-4 py-3 flex justify-center items-center">
+      <Logo />
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 pt-6 space-y-6">
+    <Hero />
+    <InfoCards />
+
+    <section class="fade-in sticky top-[65px] z-40 py-2 bg-[#f5f5f7]" style="animation-delay: 0.2s;">
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+          <i data-lucide="search" class="w-5 h-5"></i>
+        </div>
+        <input
+          type="search"
+          id="searchInput"
+          class="w-full bg-white border border-slate-200 text-slate-900 text-[16px] rounded-2xl focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green block pl-12 p-3.5 shadow-sm transition-all placeholder:text-slate-400"
+          placeholder="Buscar por nome..."
+          aria-label="Buscar nome na lista de RGs prontos"
+          autocomplete="off"
+        />
+        <button
+          id="clearSearchBtn"
+          type="button"
+          class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hidden hover:text-slate-600"
+          aria-label="Limpar busca"
+        >
+          <i data-lucide="x-circle" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </section>
+
+    <ListaNomes nomes={lista.prontos} />
+    <ListaPendencias pendencias={lista.pendencias} />
+
+    <div id="emptyState" class="hidden text-center py-12">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-slate-100 text-slate-400 rounded-full mb-4">
+        <i data-lucide="search-x" class="w-8 h-8"></i>
+      </div>
+      <h3 class="text-lg font-medium text-slate-900">Nenhum nome encontrado</h3>
+      <p class="text-slate-500 mt-1 text-sm">Verifique a ortografia e tente novamente.</p>
+    </div>
+  </main>
+
+  <button
+    id="shareBtn"
+    type="button"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 glass shadow-apple-lg border border-white/20 text-slate-800 rounded-full px-6 py-3.5 flex items-center space-x-2 active:scale-95 transition-all duration-300 z-50"
+  >
+    <i data-lucide="share" class="w-5 h-5 text-brand-orange" id="shareIcon"></i>
+    <i data-lucide="loader-2" class="w-5 h-5 text-brand-green hidden animate-spin" id="loadingIcon"></i>
+    <span class="font-medium text-[15px]" id="shareBtnText">Avisar Amigos</span>
+  </button>
+
+  <script>
+    import { initClient } from '../scripts/client';
+    initClient();
+  </script>
+</Layout>

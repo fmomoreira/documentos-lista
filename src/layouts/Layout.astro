@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import { LOGO_OG, SITE_NAME, SITE_URL } from '../lib/site';
+import { buildJsonLd } from '../lib/schema';
+
+interface Props {
+  title?: string;
+  description?: string;
+  totalNomes?: number;
+  dateModified?: string;
+}
+
+const {
+  title = `${SITE_NAME} | Consulta Oficial`,
+  description = 'Consulta oficial de Carteira de Identidade Nacional (CIN/RG) pronta para retirada em São José do Belmonte, PE.',
+  totalNomes = 0,
+  dateModified = new Date().toISOString().slice(0, 10),
+} = Astro.props;
+
+const jsonLd = buildJsonLd(totalNomes, dateModified);
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>{title}</title>
+
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="RG pronto, CIN, Carteira de Identidade Nacional, São José do Belmonte, Pernambuco, Prefeitura, retirada de RG, lista de nomes, documentos prontos"
+    />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="author" content="Prefeitura Municipal de São José do Belmonte" />
+    <meta name="geo.region" content="BR-PE" />
+    <meta name="geo.placename" content="São José do Belmonte" />
+    <meta name="language" content="pt-BR" />
+    <meta name="theme-color" content="#2ea635" />
+    <link rel="canonical" href={`${SITE_URL}/`} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:url" content={`${SITE_URL}/`} />
+    <meta property="og:title" content="Seu Novo RG está pronto! - São José do Belmonte" />
+    <meta
+      property="og:description"
+      content="Consulta oficial: veja se seu nome está na lista de RGs (CIN) prontos para retirada."
+    />
+    <meta property="og:image" content={LOGO_OG} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Logo da Prefeitura de São José do Belmonte" />
+    <meta property="og:site_name" content="Prefeitura de São José do Belmonte" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={SITE_NAME} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={LOGO_OG} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <link rel="preconnect" href={SITE_URL} crossorigin />
+    <link rel="preload" as="image" href="/assets/logo.avif" type="image/avif" />
+    <link rel="preload" as="image" href="/assets/logo.webp" type="image/webp" />
+  </head>
+  <body class="text-slate-800 pb-24">
+    <slot />
+  </body>
+</html>

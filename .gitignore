@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+public/assets/logo*.png
+public/assets/logo*.webp
+public/assets/logo*.avif
+public/assets/logo-manifest.json
+.env

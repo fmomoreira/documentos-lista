@@ -1,0 +1,30 @@
+---
+import { RETIRADA } from '../lib/site';
+---
+
+<section class="fade-in grid grid-cols-1 md:grid-cols-2 gap-4" style="animation-delay: 0.1s;">
+  <div class="bg-white rounded-[24px] p-5 shadow-apple border border-slate-100 flex items-start space-x-4">
+    <div class="bg-orange-50 p-3 rounded-2xl text-brand-orange shrink-0">
+      <i data-lucide="map-pin" class="w-6 h-6"></i>
+    </div>
+    <div>
+      <h3 class="text-[13px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Local de Retirada</h3>
+      <p class="text-slate-800 text-[15px] font-medium leading-snug">{RETIRADA.local}</p>
+      <p class="text-slate-500 text-sm mt-1 leading-snug">
+        {RETIRADA.endereco}<br />
+        <span class="text-slate-400 text-xs">({RETIRADA.referencia})</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-[24px] p-5 shadow-apple border border-slate-100 flex items-start space-x-4">
+    <div class="bg-green-50 p-3 rounded-2xl text-brand-green shrink-0">
+      <i data-lucide="clock" class="w-6 h-6"></i>
+    </div>
+    <div>
+      <h3 class="text-[13px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Horário</h3>
+      <p class="text-slate-800 text-[15px] font-medium leading-snug">{RETIRADA.horario}</p>
+      <p class="text-slate-500 text-sm mt-1 leading-snug">{RETIRADA.dias}</p>
+    </div>
+  </div>
+</section>
