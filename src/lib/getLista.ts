@@ -38,13 +38,21 @@ function normalizarRespostaApi(data: ApiListaResponse): ListaDocumentos {
  */
 export async function getLista(): Promise<ListaDocumentos> {
   const apiUrl = process.env.LISTA_API_URL;
+  const apiKey = process.env.LISTA_API_KEY;
 
   if (apiUrl) {
     try {
       console.log(`📡 Buscando lista em: ${apiUrl}`);
-      const response = await fetch(apiUrl, {
-        headers: { Accept: 'application/json' },
-      });
+      const headers: Record<string, string> = {
+        Accept: 'application/json',
+      };
+
+      if (apiKey) {
+        headers.Authorization = `Bearer ${apiKey}`;
+        headers['X-API-Key'] = apiKey;
+      }
+
+      const response = await fetch(apiUrl, { headers });
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);

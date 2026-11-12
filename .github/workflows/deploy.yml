@@ -1,0 +1,57 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        env:
+          LISTA_API_URL: ${{ secrets.LISTA_API_URL }}
+          LISTA_API_KEY: ${{ secrets.LISTA_API_KEY }}
+        run: npm run build
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy dist/ to nginx
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          rsync -avz --delete \
+            --exclude '.git' \
+            -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+            dist/ \
+            "${SSH_USER}@${SSH_HOST}:${DEPLOY_PATH}/"
+
+          ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes \
+            "${SSH_USER}@${SSH_HOST}" \
+            "chown -R www-data:www-data '${DEPLOY_PATH}' && test -f '${DEPLOY_PATH}/index.html' && ls -lh '${DEPLOY_PATH}/index.html'"
